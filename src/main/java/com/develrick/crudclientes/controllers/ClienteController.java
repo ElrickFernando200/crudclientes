@@ -2,6 +2,7 @@ package com.develrick.crudclientes.controllers;
 
 import com.develrick.crudclientes.dtos.ClienteDTO;
 import com.develrick.crudclientes.services.ClienteService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -31,7 +32,7 @@ public class ClienteController {
     }
 
     @PostMapping
-    public ResponseEntity<ClienteDTO> save(@RequestBody ClienteDTO clienteDTO){
+    public ResponseEntity<ClienteDTO> save(@Valid @RequestBody ClienteDTO clienteDTO){
         ClienteDTO dto = clienteService.save(clienteDTO);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(dto.getId()).toUri();
@@ -39,7 +40,7 @@ public class ClienteController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<ClienteDTO> update(@PathVariable Long id,@RequestBody ClienteDTO clienteDTO){
+    public ResponseEntity<ClienteDTO> update(@PathVariable Long id, @Valid  @RequestBody ClienteDTO clienteDTO){
         ClienteDTO dto = clienteService.update(id,clienteDTO);
         return ResponseEntity.ok(dto);
     }

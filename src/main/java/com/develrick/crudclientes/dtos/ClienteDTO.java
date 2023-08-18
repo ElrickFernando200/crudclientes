@@ -1,6 +1,10 @@
 package com.develrick.crudclientes.dtos;
 
 import com.develrick.crudclientes.entities.Cliente;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PastOrPresent;
+import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
 
@@ -8,9 +12,16 @@ public class ClienteDTO {
 
 
     private Long id;
+    @NotBlank
+    @Size(min = 3, max = 50, message = "Valor deve ter entre 3 e 50 caracteres")
     private String nome;
+    @NotBlank
+    @Size(max = 11, message = "Valor Inserido Inválido")
     private String cpf;
+
+
     private Double renda;
+    @PastOrPresent(message = "A data Deve ser no passado ou presente")
     private LocalDate dataNascimento;
     private Integer quantidadeFilhos;
 
